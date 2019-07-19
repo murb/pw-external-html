@@ -4,11 +4,20 @@ ExternalHTML Loader
 Given an HTML URL, this module will pull it, and let you output it. This module
 will also cache feeds that you retrieve with it.
 
+Installing
+----------
 
-More Details
-------------
+This module hasn't been submitted to the ProcessWire modules directory. To 
+install what you see here, simply add the zip provided by Github of the exact
+contents of this module's master branch:
 
-This module loads the given page and can than output all its contents.
+https://github.com/murb/pw-external-html/archive/master.zip
+
+How to use it
+-------------
+
+To use this, you need to modify a template where you want to include some
+external HTML.
 
 Example #1: Using the predefined rendering
 ------------------------------------------
