@@ -44,6 +44,9 @@
  * // if you want to disable the cache, set it to 0.
  * $html->cache = 3600;
  *
+ * // fall back to using the cache's content on LoadError (default = true)
+ * $html->useCacheOnLoadError = true;
+ *
  * // tell it to strip out any HTML tags (default = false)
  * $html->stripTags = false;
  *
@@ -101,6 +104,7 @@ class ExternalHTML extends WireData implements Module {
         'onlyBody' => true,
         'fragmentId' => '',
         'cache' => 1800,             // Number of seconds to cache, or 0 to skip caching (default = 30 minutes)
+        'useCacheOnLoadError' => true,  // show the cached version, instead of nothing when loading failed
         'stripTags' => false,             // Strip any markup tags that appear in the feed? (default: false)
         'encodeEntities' => false,         // Whether to automatically decode and re-encode the entities for all fields (default: false)
 
@@ -238,8 +242,16 @@ class ExternalHTML extends WireData implements Module {
         if(!is_file($cacheFile) || time() - filemtime($cacheFile) > $this->options['cache']) {
             $xmlData = @file_get_contents($url);
             if($xmlData === false) {
-                $this->error("Unable to load " . htmlentities($url));
-                return false;
+                $this->error("Unable to load " . htmlentities($url) . " (falling back to cached version)");
+                if($this->options['useCacheOnLoadError']) {
+                    $xmlData = file_get_contents($cacheFile);
+                    if($xmlData === false) {
+                        $this->error("Unable to load XML data cache");
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             } else if($this->options['cache']) {
                 @file_put_contents($cacheFile, $this->cleanText($xmlData), LOCK_EX);
             }

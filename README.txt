@@ -7,7 +7,7 @@ will also cache feeds that you retrieve with it.
 Installing
 ----------
 
-This module hasn't been submitted to the ProcessWire modules directory. To 
+This module hasn't been submitted to the ProcessWire modules directory. To
 install what you see here, simply add the zip provided by Github of the exact
 contents of this module's master branch:
 
@@ -49,6 +49,9 @@ $html->fragmentId = "main";
 // set the feed to cache for an hour (default = 1800 seconds)
 // if you want to disable the cache, set it to 0.
 $html->cache = 3600;
+
+// fall back to using the cache's content on LoadError (default = true)
+$html->useCacheOnLoadError = true;
 
 // tell it to strip out any HTML tags (default = false)
 $html->stripTags = false;
