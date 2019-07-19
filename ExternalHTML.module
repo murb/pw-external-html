@@ -85,6 +85,7 @@ class ExternalHTML extends WireData implements Module {
         return array(
             'title' => 'Load an HTML page',
             'summary' => 'Given an URL, this module will pull it, cache it, and let you render it.',
+            'href' => 'https://github.com/murb/pw-external-html',
             'version' => 100,
             'permanent' => false,
             'singular' => false,
