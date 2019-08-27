@@ -163,7 +163,7 @@ class ExternalHTML extends WireData implements Module {
     }
 
     /**
-     * Gets a config option or $entries info
+     * Gets a config option
      *
      */
     public function get($key) {
@@ -174,7 +174,6 @@ class ExternalHTML extends WireData implements Module {
             else if($key == 'date') $key = 'updated';
             else if($key == 'body') $key = 'subtitle';
 
-        if(array_key_exists($key, $this->entries)) return $this->entries[$key];
         if(array_key_exists($key, $this->options)) return $this->options[$key];
 
         return parent::get($key);
