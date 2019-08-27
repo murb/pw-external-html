@@ -262,7 +262,7 @@ class ExternalHTML extends WireData implements Module {
             }
         }
 
-        return $xmlData;
+        return $this->cleanText($xmlData);
     }
 
     /**
