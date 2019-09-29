@@ -252,7 +252,8 @@ class ExternalHTML extends WireData implements Module {
                     return false;
                 }
             } else if($this->options['cache']) {
-                @file_put_contents($cacheFile, $this->cleanText($xmlData), LOCK_EX);
+                $xmlData = $this->cleanText($xmlData);
+                @file_put_contents($cacheFile, $xmlData, LOCK_EX);
             }
         } else {
             $xmlData = file_get_contents($cacheFile);
@@ -262,7 +263,7 @@ class ExternalHTML extends WireData implements Module {
             }
         }
 
-        return $this->cleanText($xmlData);
+        return $xmlData;
     }
 
     /**
